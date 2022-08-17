@@ -18,4 +18,4 @@ jobs:
           helm lint demochart
           helm install k8stohelm demochart
         env:
-          KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG }}
+          KUBECONFIG: ${{ secrets.KUBECONFIG }}
