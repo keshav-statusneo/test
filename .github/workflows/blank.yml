@@ -14,4 +14,4 @@ jobs:
       - name: Publish Helm chart
         run: |
           helm version
-          helm template .\demochart\
+          helm template demochart
