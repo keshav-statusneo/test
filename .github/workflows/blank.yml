@@ -15,3 +15,4 @@ jobs:
         run: |
           helm version
           helm template demochart
+          helm lint demochart
