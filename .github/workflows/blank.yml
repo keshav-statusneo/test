@@ -1,0 +1,37 @@
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+    branches:
+      - "main"
+      
+jobs:
+  release-chart:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Minikube
+        uses: manusa/actions-setup-minikube@v2.7.0
+        with:
+          minikube version: 'v1.26.1'
+          kubernetes version: 'v1.24.3'
+          github token: ${{ secrets.TOKEN }}
+      - name: Interact with the cluster
+        run: kubectl get node
+#       - uses: actions-hub/kubectl@master
+      
+#         env:
+#           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+#         with:
+#           args: get pods  
+        
+      - name: Publish Helm chart
+        run: |
+          helm version
+          helm template demochart
+          helm lint demochart
+          helm install k8stohelm demochart
+          kubectl get svc
+          
+        
