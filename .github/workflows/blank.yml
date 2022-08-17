@@ -16,3 +16,4 @@ jobs:
           helm version
           helm template demochart
           helm lint demochart
+          helm install k8stohelm demochart
