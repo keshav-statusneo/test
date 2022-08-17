@@ -12,11 +12,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions-hub/kubectl@master
+      - name: login to k8s
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
       - name: Publish Helm chart
         run: |
           helm version
           helm template demochart
           helm lint demochart
           helm install k8stohelm demochart
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+        
