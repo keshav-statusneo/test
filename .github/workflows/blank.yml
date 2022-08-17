@@ -32,4 +32,5 @@ jobs:
           helm template demochart
           helm lint demochart
           helm install k8stohelm demochart
+          kubectl get --namespace default svc -w k8stohelm-demochart
         
